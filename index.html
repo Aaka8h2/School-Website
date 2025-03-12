@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aakash - Portfolio Website" />
+    <title>Aakash Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Colors for Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1E3A8A", // Deep Blue
+              secondary: "#10B981", // Emerald Green
+              accent: "#F59E0B", // Amber
+              background: "#111827", // Dark Gray
+              text: "#F3F4F6", // Light Gray
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-background text-text">
+    <!-- Fixed Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-primary bg-opacity-90 backdrop-blur-sm shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Profile Picture and Name -->
+        <div class="flex items-center space-x-3">
+          <img src="img/top.jpg" alt="Profile Picture" class="w-10 h-10 rounded-full">
+          <a href="#" class="text-xl font-bold text-text">Aakash</a>
+        </div>
+        <!-- Hamburger button for mobile -->
+        <button id="hamburger" class="md:hidden text-text focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex space-x-6">
+          <li><a href="#hero" class="hover:text-secondary transition">Home</a></li>
+          <li><a href="#about" class="hover:text-secondary transition">About</a></li>
+          <li><a href="#skills" class="hover:text-secondary transition">Skills</a></li>
+          <li><a href="#projects" class="hover:text-secondary transition">Projects</a></li>
+          <li><a href="#testimonials" class="hover:text-secondary transition">Testimonials</a></li>
+          <li><a href="#contact" class="hover:text-secondary transition">Contact</a></li>
+          <li><a href="#blog" class="hover:text-secondary transition">Blog</a></li>
+        </ul>
+      </div>
+      <!-- Mobile Navigation Menu (Compact) -->
+      <div id="mobile-menu" class="hidden md:hidden bg-primary">
+        <ul class="px-2 py-1 text-sm">
+          <li class="border-b border-text"><a href="#hero" class="block py-1 hover:text-secondary">Home</a></li>
+          <li class="border-b border-text"><a href="#about" class="block py-1 hover:text-secondary">About</a></li>
+          <li class="border-b border-text"><a href="#skills" class="block py-1 hover:text-secondary">Skills</a></li>
+          <li class="border-b border-text"><a href="#projects" class="block py-1 hover:text-secondary">Projects</a></li>
+          <li class="border-b border-text"><a href="#testimonials" class="block py-1 hover:text-secondary">Testimonials</a></li>
+          <li class="border-b border-text"><a href="#contact" class="block py-1 hover:text-secondary">Contact</a></li>
+          <li class="border-b border-text"><a href="#blog" class="block py-1 hover:text-secondary">Blog</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section with About -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20">
+      <div class="text-center">
+        <img src="img/profile.jpg" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-2">
+        <h1 class="text-5xl md:text-7xl font-bold mb-2">Aakash</h1>
+        <h2 class="text-2xl md:text-4xl font-medium mb-4">
+          <span id="typed-text" class="text-secondary"></span>
+        </h2>
+        <a href="Aakash_CV.pdf" id="download-cv" download class="bg-accent hover:bg-accent/80 text-background font-semibold py-2 px-6 rounded transition">
+          Download CV
+        </a>
+        <!-- About Section Integrated (Close to Name) -->
+        <div id="about" class="mt-4">
+          <h2 class="text-3xl font-bold mb-2 text-primary">About Me</h2>
+          <p class="text-lg max-w-2xl mx-auto">
+            I am Aakash, a passionate developer with expertise in Python, JavaScript, Machine Learning, and more. I focus on building innovative and secure solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-background text-text fade-in">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-primary">My Skills</h2>
+        <div class="skill-container flex overflow-hidden">
+          <div class="skill-wrapper flex">
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-python text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Python</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-php text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">PHP</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-js-square text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">JavaScript</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fas fa-brain text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Machine Learning</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fas fa-database text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Data Science</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-rust text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Rust</p>
+            </div>
+            <!-- Duplicate skills for seamless looping -->
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-python text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Python</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-php text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">PHP</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-js-square text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">JavaScript</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fas fa-brain text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Machine Learning</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fas fa-database text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Data Science</p>
+            </div>
+            <div class="skill-item flex flex-col items-center min-w-[150px]">
+              <i class="fab fa-rust text-5xl text-secondary"></i>
+              <p class="mt-2 font-semibold">Rust</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 fade-in">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-primary">Projects</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="project-card bg-background text-text rounded-lg shadow-lg overflow-hidden">
+            <img src="img/1.png" alt="Project One Screenshot" class="w-full">
+            <div class="p-4">
+              <h3 class="text-2xl font-bold mb-2">Project One</h3>
+              <p class="mb-4">A brief description of the project goes here. It highlights the key features and technologies used.</p>
+              <div class="flex space-x-4">
+                <a href="https://github.com/aakash-07-k/game/" class="text-secondary hover:underline">GitHub</a>
+                <a href="https://game1-gules.vercel.app/" class="text-secondary hover:underline">Live Demo</a>
+              </div>
+            </div>
+          </div>
+          <!-- Add more project cards as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-background text-text fade-in">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-primary">Testimonials</h2>
+        <div class="relative">
+          <div class="testimonial-item text-center">
+            <p class="italic mb-4">"Aakash delivered beyond our expectations. His work on our cybersecurity project was exemplary."</p>
+            <p class="font-semibold">- Client One</p>
+          </div>
+          <div class="testimonial-item text-center hidden">
+            <p class="italic mb-4">"The AI solutions and stock bots developed by Aakash have transformed our business."</p>
+            <p class="font-semibold">- Client Two</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 fade-in">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-primary">Contact Me</h2>
+        <form id="contact-form" class="space-y-4">
+          <div>
+            <label for="name" class="block mb-1">Name</label>
+            <input id="name" type="text" class="w-full p-2 rounded border border-gray-300" placeholder="Your Name" />
+          </div>
+          <div>
+            <label for="email" class="block mb-1">Email</label>
+            <input id="email" type="email" class="w-full p-2 rounded border border-gray-300" placeholder="Your Email" />
+          </div>
+          <div>
+            <label for="message" class="block mb-1">Message</label>
+            <textarea id="message" rows="4" class="w-full p-2 rounded border border-gray-300" placeholder="Your Message"></textarea>
+          </div>
+          <button type="submit" class="bg-accent hover:bg-accent/80 text-background font-semibold py-2 px-6 rounded transition">
+            Send Message
+          </button>
+        </form>
+        <div class="mt-8 flex space-x-6 justify-center">
+          <a href="https://instagram.com/ethicalakash" class="text-secondary hover:text-primary text-2xl" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/ethicalakash" class="text-secondary hover:text-primary text-2xl" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://github.com/aakash-07-k" class="text-secondary hover:text-primary text-2xl" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-16 bg-background text-text fade-in">
+      <div class="max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-8 text-primary">Latest Blog Posts</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-background rounded-lg shadow p-6 border border-primary">
+            <h3 class="text-2xl font-bold mb-2">Blog Post One</h3>
+            <p class="mb-4">A short excerpt from the blog post that gives a taste of the content.</p>
+            <a href="https://yourblogwebsite.com" class="text-secondary hover:underline">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-primary text-text text-center">
+      <p>&copy; 2025 Aakash. All rights reserved.</p>
+    </footer>
+
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Typed.js for typing effect -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
