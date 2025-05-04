@@ -1,0 +1,77 @@
+/* Smooth scrolling for in-page links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Testimonial carousel items */
+.testimonial-item {
+  transition: opacity 0.5s ease;
+}
+
+/* Skill scrolling animation */
+.skill-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.skill-wrapper {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+.skill-item {
+  min-width: 150px;
+  margin-right: 20px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Project Image Containers */
+.image-container {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border: 2px solid #10B981;
+  border-radius: 8px;
+  background: #1E3A8A20;
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.image-container:hover img {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Scroll Snap */
+.projects-container {
+  scroll-snap-type: x mandatory;
+}
+
+.project-card {
+  scroll-snap-align: start;
+}
+/* Form styling */
+input, textarea {
+  background: #111827 !important;
+  color: #F3F4F6 !important;
+  border-color: #10B981 !important;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #F59E0B;
+  outline-offset: 2px;
+}

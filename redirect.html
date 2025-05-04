@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111827;
+            color: #ffffff;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 500;
+            overflow: hidden;
+        }
+
+        .container {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #06B6D4;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.location.href = "https://t.me/Sky_stock_zbot";
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <p>I am redirecting to the project...</p>
+        <div class="loader"></div>
+    </div>
+</body>
+</html>
