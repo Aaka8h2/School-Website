@@ -11,6 +11,7 @@
             --primary-color: #2a2a2a;
             --secondary-color: #00ff9d;
             --danger-color: #ff4658;
+            --warning-color: #ffa800;
             --background: #1a1a1a;
         }
 
@@ -29,6 +30,21 @@
             min-height: 100vh;
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         /* Sidebar */
         .sidebar {
             background: var(--primary-color);
@@ -36,12 +52,16 @@
             position: fixed;
             height: 100vh;
             width: 250px;
+            transition: transform 0.3s ease;
         }
 
         .logo {
             font-size: 1.5rem;
             margin-bottom: 40px;
             color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-menu {
@@ -54,6 +74,9 @@
             border-radius: 8px;
             cursor: pointer;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-item:hover {
@@ -71,6 +94,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .stats-container {
@@ -85,11 +110,29 @@
             padding: 20px;
             border-radius: 12px;
             border-left: 4px solid var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::after {
+            transform: scaleX(1);
         }
 
         .chart-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-top: 30px;
         }
@@ -98,7 +141,8 @@
             background: var(--primary-color);
             padding: 20px;
             border-radius: 12px;
-            height: 400px;
+            min-height: 400px;
+            position: relative;
         }
 
         .alert-banner {
@@ -107,6 +151,68 @@
             border-radius: 8px;
             margin-bottom: 20px;
             animation: pulse 1.5s infinite;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* New Features */
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .status-item {
+            background: var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-indicator {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .online { background: var(--secondary-color); }
+        .offline { background: var(--danger-color); }
+        .warning { background: var(--warning-color); }
+
+        .log-container {
+            background: var(--primary-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-entry {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .advisory-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .advisory-card {
+            background: var(--primary-color);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--warning-color);
         }
 
         @keyframes pulse {
@@ -114,19 +220,52 @@
             50% { opacity: 1; }
             100% { opacity: 0.8; }
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 999;
+                width: 280px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                grid-column: 1;
+                padding: 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .chart-card {
+                min-height: 300px;
+            }
+        }
     </style> 
  </head> 
  <body> 
-  <nav class="sidebar"> 
+  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button> 
+  <nav class="sidebar" id="sidebar"> 
    <div class="logo">
-    CyberShield
+    <i class="fas fa-shield-alt"></i> CyberShield
    </div> 
    <ul class="nav-menu"> 
     <li class="nav-item"><i class="fas fa-home"></i> Dashboard</li> 
-    <li class="nav-item"><i class="fas fa-bell"></i> Alerts</li> 
+    <li class="nav-item"><i class="fas fa-bell"></i> Alerts <span class="alert-counter">3</span></li> 
     <li class="nav-item"><i class="fas fa-chart-network"></i> Network</li> 
     <li class="nav-item"><i class="fas fa-shield-alt"></i> Firewall</li> 
     <li class="nav-item"><i class="fas fa-user-secret"></i> IAM</li> 
+    <li class="nav-item"><i class="fas fa-history"></i> Logs</li> 
+    <li class="nav-item"><i class="fas fa-cog"></i> Settings</li> 
    </ul> 
   </nav> 
   <main class="main-content"> 
@@ -135,8 +274,11 @@
     <div class="time-display" id="timeDisplay"></div> 
    </div> 
    <div class="alert-banner">
-     ⚠️ 3 Critical Alerts Detected - Immediate Attention Required 
+     <i class="fas fa-exclamation-triangle"></i> 3 Critical Alerts Detected - Immediate Attention Required 
    </div> 
+
+   <div class="system-status" id="systemStatus"></div>
+
    <div class="stats-container"> 
     <div class="stat-card"> 
      <h3>Active Threats</h3> 
@@ -150,7 +292,14 @@
      <h3>Vulnerabilities</h3> 
      <p class="stat-value" id="vulnerabilities">0</p> 
     </div> 
+    <div class="stat-card"> 
+     <h3>Uptime</h3> 
+     <p class="stat-value" id="uptime">99.9%</p> 
+    </div> 
    </div> 
+
+   <div class="log-container" id="logContainer"></div>
+
    <div class="chart-container"> 
     <div class="chart-card"> 
      <canvas id="networkTrafficChart"></canvas> 
@@ -165,8 +314,36 @@
      <canvas id="vulnerabilityChart"></canvas> 
     </div> 
    </div> 
+
+   <div class="advisory-container">
+    <div class="advisory-card">
+        <h4><i class="fas fa-exclamation-circle"></i> Critical Update Required</h4>
+        <p>Security patch v2.4.1 available</p>
+    </div>
+    <div class="advisory-card">
+        <h4><i class="fas fa-info-circle"></i> New Firewall Rules</h4>
+        <p>Review updated policies</p>
+    </div>
+   </div>
   </main> 
   <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
         // Real-time Updates
         function updateStats() {
             document.getElementById('activeThreats').textContent = 
@@ -181,72 +358,115 @@
         function updateTime() {
             const now = new Date();
             document.getElementById('timeDisplay').textContent = 
-                now.toLocaleTimeString('en-US', { hour12: true });
+                now.toLocaleTimeString('en-US', { hour12: true }) + ' | ' +
+                now.toLocaleDateString();
+        }
+
+        // System Status
+        function updateSystemStatus() {
+            const statusItems = [
+                { name: 'Firewall', status: 'online' },
+                { name: 'IDS/IPS', status: 'warning' },
+                { name: 'VPN', status: 'offline' },
+                { name: 'Database', status: 'online' },
+                { name: 'Cloud Services', status: 'online' },
+                { name: 'API Gateway', status: 'warning' }
+            ];
+
+            const statusContainer = document.getElementById('systemStatus');
+            statusContainer.innerHTML = statusItems.map(item => `
+                <div class="status-item">
+                    <div class="status-indicator ${item.status}"></div>
+                    <div>${item.name}</div>
+                    <small>${item.status.toUpperCase()}</small>
+                </div>
+            `).join('');
+        }
+
+        // Log Simulation
+        function updateLogs() {
+            const logEntries = [
+                `[${new Date().toLocaleTimeString()}] Firewall rule updated`,
+                `[${new Date().toLocaleTimeString()}] New device connected`,
+                `[${new Date().toLocaleTimeString()}] Security scan completed`,
+                `[${new Date().toLocaleTimeString()}] Unauthorized access attempt blocked`
+            ];
+            
+            const logContainer = document.getElementById('logContainer');
+            logContainer.innerHTML = logEntries.map(entry => `
+                <div class="log-entry">${entry}</div>
+            `).join('');
+            logContainer.scrollTop = logContainer.scrollHeight;
         }
 
         // Chart Configurations
-        const networkTrafficCtx = document.getElementById('networkTrafficChart').getContext('2d');
-        new Chart(networkTrafficCtx, {
-            type: 'line',
-            data: {
-                labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-                datasets: [{
-                    label: 'Network Traffic (GB)',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderColor: '#00ff9d',
-                    tension: 0.4
-                }]
+        const chartConfig = {
+            networkTraffic: {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'Network Traffic (GB)',
+                        data: [12, 19, 3, 5, 2, 3],
+                        borderColor: '#00ff9d',
+                        tension: 0.4
+                    }]
+                }
+            },
+            threatDistribution: {
+                type: 'doughnut',
+                data: {
+                    labels: ['Malware', 'Phishing', 'DDoS', 'Insider'],
+                    datasets: [{
+                        data: [30, 45, 15, 10],
+                        backgroundColor: ['#ff4658', '#00ff9d', '#ffa800', '#009dff']
+                    }]
+                }
+            },
+            incidentTrend: {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Security Incidents',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: '#00ff9d'
+                    }]
+                }
+            },
+            vulnerability: {
+                type: 'radar',
+                data: {
+                    labels: ['Servers', 'Endpoints', 'Network', 'Cloud', 'IoT'],
+                    datasets: [{
+                        label: 'Vulnerability Score',
+                        data: [65, 59, 90, 81, 56],
+                        backgroundColor: 'rgba(0, 255, 157, 0.2)',
+                        borderColor: '#00ff9d'
+                    }]
+                }
             }
+        };
+
+        // Initialize Charts
+        Object.keys(chartConfig).forEach(chartId => {
+            const ctx = document.getElementById(`${chartId}Chart`).getContext('2d');
+            new Chart(ctx, chartConfig[chartId]);
         });
 
-        const threatDistributionCtx = document.getElementById('threatDistributionChart').getContext('2d');
-        new Chart(threatDistributionCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Malware', 'Phishing', 'DDoS', 'Insider'],
-                datasets: [{
-                    data: [30, 45, 15, 10],
-                    backgroundColor: ['#ff4658', '#00ff9d', '#ffa800', '#009dff']
-                }]
-            }
-        });
-
-        const incidentTrendCtx = document.getElementById('incidentTrendChart').getContext('2d');
-        new Chart(incidentTrendCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Security Incidents',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: '#00ff9d'
-                }]
-            }
-        });
-
-        const vulnerabilityCtx = document.getElementById('vulnerabilityChart').getContext('2d');
-        new Chart(vulnerabilityCtx, {
-            type: 'radar',
-            data: {
-                labels: ['Servers', 'Endpoints', 'Network', 'Cloud', 'IoT'],
-                datasets: [{
-                    label: 'Vulnerability Score',
-                    data: [65, 59, 90, 81, 56],
-                    backgroundColor: 'rgba(0, 255, 157, 0.2)',
-                    borderColor: '#00ff9d'
-                }]
-            }
-        });
-
-        // Update data every 5 seconds
+        // Update data every 3 seconds
         setInterval(() => {
             updateStats();
             updateTime();
-        }, 5000);
+            updateSystemStatus();
+            updateLogs();
+        }, 3000);
 
         // Initial calls
         updateStats();
         updateTime();
+        updateSystemStatus();
+        updateLogs();
 
         // Navigation interaction
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -254,6 +474,7 @@
                 document.querySelectorAll('.nav-item').forEach(nav => 
                     nav.style.background = '');
                 this.style.background = '#333';
+                if (window.innerWidth <= 768) sidebar.classList.remove('active');
             });
         });
     </script> 
