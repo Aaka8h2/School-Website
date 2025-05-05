@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Typing effect for hero section
   var typed = new Typed("#typed-text", {
-    strings: ["Developer", "Cybersecurity Enthusiast", "Bot Creator", "influencer", "Trade & inverter", "Artificial intelligence"],
+    strings: ["Developer", "Cybersecurity Enthusiast", "Bot Creator", "influencer", "inverter", "Artificial intelligence"],
     typeSpeed: 50,
     backSpeed: 30,
     loop: true,
