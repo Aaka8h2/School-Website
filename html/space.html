@@ -108,7 +108,7 @@
         const cfg = { font, size: 0.8, height: 0.2, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.02, bevelSegments: 8, curveSegments: 12 };
         const mat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 1, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.1, emissive: 0x440044, emissiveIntensity: 0.8 });
 
-        const darkGeo = new TextGeometry('sonic', cfg);
+        const darkGeo = new TextGeometry('Aakash', cfg);
         darkGeo.center();
         darkTextMesh = new THREE.Mesh(darkGeo, mat);
         darkTextMesh.position.y = 1.5;
